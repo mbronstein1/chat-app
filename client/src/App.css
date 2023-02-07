@@ -11,25 +11,31 @@ html {
   align-items: center;
   height: 100vh;
   background-color: #2a2730;
+  color: white;
 }
 
 .App h1 {
-  color: white;
-  margin-top: 100px;
+  margin: 100px 0 0 0;
+  flex: 5%;
+}
+
+/* login container */
+.container {
+  flex: 70%;
 }
 
 .login {
-  position: absolute;
-  top: 50%;
-  margin-top: -175px;
   width: 600px;
-  height: 350px;
+  height: 500px;
+  max-width: 90%;
   border: 5px solid #0091ff;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
+  margin-inline: auto;
 }
 
 .login input {
@@ -61,4 +67,29 @@ html {
 .login button:hover {
   cursor: pointer;
   background-color: #037edc;
+}
+
+/* Adjustments to login container for chat container */
+.login .messages {
+  flex: 90%;
+  width: 100%;
+  background-color: #4b4a4d;
+}
+
+.login .message-inputs {
+  border-top: 2px solid #0091ff;
+  width: 100%;
+}
+
+.login .message-inputs input {
+  width: 70%;
+  border-radius: 10px;
+}
+
+.login .message-inputs button {
+  margin-top: 0;
+  margin-bottom: 5px;
+  margin-right: 5px;
+  width: 80px;
+  border-radius: 10px;
 }
