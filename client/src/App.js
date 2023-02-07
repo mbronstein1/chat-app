@@ -12,6 +12,11 @@ function App() {
   const [room, setRoom] = useState('');
   const [username, setUsername] = useState('');
   const [roomVisibility, setRoomVisibility] = useState('hidden');
+
+  const [message, setMessage] = useState('');
+  const [messageList, setMessageList] = useState([]);
+
+  // Toast notifications
   const notifyRoomSuccess = () => toast.success(`${username} has joined room ${room}`);
   const notifyInvalidInput = () =>
     toast.error('Please enter both name and room before entering chat', {
@@ -39,6 +44,16 @@ function App() {
     socket.emit('join_room', room, notifyRoomSuccess);
     socket.on('room_joined', () => {
       notifyRoomSuccess();
+    });
+  };
+
+  const sendMessage = () => {
+    socket.emit('send_message', { room, username, message });
+    setMessageList(prevList => [...prevList, { username, message }]);
+    setMessage('');
+
+    socket.on('receive_message', messageData => {
+      setMessageList(prevList => [...prevList, { username: messageData.username, message: messageData.message }]);
     });
   };
 
@@ -72,10 +87,18 @@ function App() {
             </>
           ) : (
             <>
-              <div className='messages'>Messages</div>
+              <div className='messages'>
+                {messageList.map((messageInfo, index) => {
+                  return (
+                    <h1 key={`${messageInfo.username}: ${index}`}>
+                      {messageInfo.username} {messageInfo.message}
+                    </h1>
+                  );
+                })}
+              </div>
               <div className='message-inputs'>
-                <input type='text' placeholder='Message...' />
-                <button>Send</button>
+                <input type='text' value={message} placeholder='Message...' onChange={e => setMessage(e.target.value)} />
+                <button onClick={sendMessage}>Send</button>
               </div>
             </>
           )}
