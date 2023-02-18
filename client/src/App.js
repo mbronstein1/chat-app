@@ -4,8 +4,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 import './App.css';
 
-let socket;
-const CONNECTION_PORT = 'http://localhost:3001';
+const socket = io.connect('http://localhost:3001');
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -31,8 +30,10 @@ function App() {
     });
 
   useEffect(() => {
-    socket = io(CONNECTION_PORT);
-  }, []);
+    socket.on('receive_message', ({ username, message }) => {
+      setMessageList([...messageList, { username, message }]);
+    });
+  }, [messageList]);
 
   const connectToRoom = () => {
     if (room.trim() === '' || username.trim() === '') {
@@ -49,12 +50,8 @@ function App() {
 
   const sendMessage = () => {
     socket.emit('send_message', { room, username, message });
-    setMessageList(prevList => [...prevList, { username, message }]);
+    setMessageList([...messageList, { username, message }]);
     setMessage('');
-
-    socket.on('receive_message', messageData => {
-      setMessageList(prevList => [...prevList, { username: messageData.username, message: messageData.message }]);
-    });
   };
 
   return (

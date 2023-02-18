@@ -26,6 +26,7 @@ io.on('connection', socket => {
   });
 
   socket.on('send_message', messageData => {
+    console.log(messageData);
     socket.to(messageData.room).emit('receive_message', { username: messageData.username, message: messageData.message });
   });
 
