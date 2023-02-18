@@ -19,10 +19,10 @@ const io = new Server(server, {
 io.on('connection', socket => {
   console.log(socket.id);
 
-  socket.on('join_room', (room, notify) => {
+  socket.on('join_room', (room, name) => {
     socket.join(room);
-    socket.to(room).emit('room_joined', notify);
-    console.log(`User joined room: ${room}`);
+    socket.to(room).emit('room_joined', name);
+    console.log(`${name} joined room: ${room}`);
   });
 
   socket.on('send_message', messageData => {
