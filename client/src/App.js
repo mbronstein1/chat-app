@@ -3,6 +3,8 @@ import io from 'socket.io-client';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 import './App.css';
+import Login from './Login';
+import Chat from './Chat';
 
 const socket = io.connect('http://localhost:3001');
 
@@ -11,7 +13,6 @@ function App() {
   const [room, setRoom] = useState('');
   const [username, setUsername] = useState('');
   const [roomVisibility, setRoomVisibility] = useState('hidden');
-
   const [message, setMessage] = useState('');
   const [messageList, setMessageList] = useState([]);
 
@@ -29,13 +30,16 @@ function App() {
       theme: 'colored',
     });
 
+  // Handle message receipt
   useEffect(() => {
     socket.on('receive_message', ({ username, message }) => {
       setMessageList([...messageList, { username, message }]);
     });
   }, [messageList]);
 
-  const connectToRoom = () => {
+  // Handle room connection
+  const roomConnectionHandler = e => {
+    e.preventDefault();
     if (room.trim() === '' || username.trim() === '') {
       notifyInvalidInput();
       return;
@@ -48,7 +52,9 @@ function App() {
     });
   };
 
-  const sendMessage = () => {
+  // Handle sending a message
+  const sendMessageHandler = e => {
+    e.preventDefault();
     socket.emit('send_message', { room, username, message });
     setMessageList([...messageList, { username, message }]);
     setMessage('');
@@ -71,33 +77,11 @@ function App() {
       <h1>Chat App</h1>
       <h2 style={{ visibility: roomVisibility }}>Room: {room}</h2>
       <div className='container'>
-        <div className='login'>
+        <div className='box'>
           {!isLoggedIn ? (
-            <>
-              <div className='inputs'>
-                <input type='text' value={username} placeholder='Name...' onChange={e => setUsername(e.target.value)} />
-                <input type='text' value={room} placeholder='Room...' onChange={e => setRoom(e.target.value)} />
-              </div>
-              <button type='button' onClick={connectToRoom}>
-                Enter Chat
-              </button>
-            </>
+            <Login username={username} room={room} connectToRoom={roomConnectionHandler} setUsername={setUsername} setRoom={setRoom} />
           ) : (
-            <>
-              <div className='messages'>
-                {messageList.map((messageInfo, index) => {
-                  return (
-                    <h1 key={`${messageInfo.username}: ${index}`}>
-                      {messageInfo.username} {messageInfo.message}
-                    </h1>
-                  );
-                })}
-              </div>
-              <div className='message-inputs'>
-                <input type='text' value={message} placeholder='Message...' onChange={e => setMessage(e.target.value)} />
-                <button onClick={sendMessage}>Send</button>
-              </div>
-            </>
+            <Chat messageList={messageList} username={username} message={message} setMessage={setMessage} sendMessage={sendMessageHandler} />
           )}
         </div>
       </div>
