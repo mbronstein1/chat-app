@@ -17,7 +17,8 @@ function App() {
   const [messageList, setMessageList] = useState([]);
 
   // Toast notifications
-  const notifyRoomSuccess = name => toast.success(`${name} has joined room ${room}`);
+  const notifyRoomSuccess = () => toast.success(`You have successfully joined room ${room}`);
+  const notifyNewUserInRoom = name => toast.success(`${name} has joined room ${room}`);
   const notifyInvalidInput = () =>
     toast.error('Please enter both name and room before entering chat', {
       position: 'top-center',
@@ -46,9 +47,10 @@ function App() {
     }
     setRoomVisibility('visible');
     setIsLoggedIn(true);
+    notifyRoomSuccess(username);
     socket.emit('join_room', room, username);
     socket.on('room_joined', name => {
-      notifyRoomSuccess(name);
+      notifyNewUserInRoom(name);
     });
   };
 
