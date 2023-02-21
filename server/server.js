@@ -12,7 +12,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: ['https://poetic-starship-582a2f.netlify.app/', 'http://localhost:3000'],
+    origin: ['https://inquisitive-dragon-2cda1e.netlify.app/', 'http://localhost:3000'],
   },
 });
 
