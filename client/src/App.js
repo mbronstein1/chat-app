@@ -6,7 +6,7 @@ import './App.css';
 import Login from './Login';
 import Chat from './Chat';
 
-const socket = io.connect('http://localhost:3001');
+const socket = io.connect('https://earnest-kashata-4158b8.netlify.app/' || 'http://localhost:3001');
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
