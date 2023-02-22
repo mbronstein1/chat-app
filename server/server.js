@@ -1,5 +1,4 @@
 const express = require('express');
-const path = require('path');
 const http = require('http');
 const cors = require('cors');
 const { Server } = require('socket.io');
@@ -13,7 +12,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: ['https://luxury-smakager-d70c54.netlify.app/'],
+    origin: '*',
   },
 });
 

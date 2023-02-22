@@ -6,7 +6,7 @@ import './App.css';
 import Login from './Login';
 import Chat from './Chat';
 
-const connectionString = 'https://dark-wildflower-6160.fly.dev/';
+const connectionString = 'https://chat-app-mb-1.herokuapp.com/';
 
 const socket = io.connect(connectionString);
 
