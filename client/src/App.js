@@ -6,7 +6,7 @@ import './App.css';
 import Login from './Login';
 import Chat from './Chat';
 
-const connectionString = 'https://dark-wildflower-6160.fly.dev/';
+const connectionString = 'http://localhost:8080';
 
 const socket = io.connect(connectionString);
 

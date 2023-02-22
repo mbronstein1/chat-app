@@ -13,7 +13,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: ['https://luxury-smakager-d70c54.netlify.app/'],
+    origin: ['http://localhost:3000'],
   },
 });
 
