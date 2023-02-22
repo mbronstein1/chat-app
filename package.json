@@ -18,7 +18,7 @@
     "url": "https://github.com/mbronstein1/chat-app/issues"
   },
   "homepage": "https://github.com/mbronstein1/chat-app#readme",
-  "dependencies": {
+  "devDependencies": {
     "concurrently": "^7.6.0"
   }
 }

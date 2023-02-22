@@ -6,7 +6,7 @@ import './App.css';
 import Login from './Login';
 import Chat from './Chat';
 
-const connectionString = 'http://localhost:8080' || 'https://earnest-kashata-4158b8.netlify.app/';
+const connectionString = 'http://localhost:8080' || 'https://dark-wildflower-6160.fly.dev/';
 
 const socket = io.connect(connectionString);
 
