@@ -3,9 +3,6 @@
   "description": "",
   "version": "1.0.0",
   "main": "index.js",
-  "devDependencies": {
-    "concurrently": "^7.6.0"
-  },
   "scripts": {
     "start": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -20,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/mbronstein1/chat-app/issues"
   },
-  "homepage": "https://github.com/mbronstein1/chat-app#readme"
+  "homepage": "https://github.com/mbronstein1/chat-app#readme",
+  "dependencies": {
+    "concurrently": "^7.6.0"
+  }
 }
