@@ -1,1 +1,24 @@
-{}
+{
+  "name": "chat-app",
+  "description": "",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {
+    "concurrently": "^7.6.0"
+  },
+  "scripts": {
+    "start": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mbronstein1/chat-app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mbronstein1/chat-app/issues"
+  },
+  "homepage": "https://github.com/mbronstein1/chat-app#readme"
+}

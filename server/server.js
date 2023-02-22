@@ -12,7 +12,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: ['https://inquisitive-dragon-2cda1e.netlify.app/', 'http://localhost:3000'],
+    origin: ['https://luxury-smakager-d70c54.netlify.app/', 'http://localhost:3000'],
   },
 });
 
@@ -26,7 +26,6 @@ io.on('connection', socket => {
   });
 
   socket.on('send_message', messageData => {
-    console.log(messageData);
     socket.to(messageData.room).emit('receive_message', { username: messageData.username, message: messageData.message });
   });
 
